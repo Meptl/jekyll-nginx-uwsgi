@@ -149,6 +149,8 @@ RUN yes | gem update --system
 RUN gem install bundler
 RUN gem install jekyll
 
+RUN yes | gem update
+
 ENV PATH=/usr/local/bin:$PATH
 
 # Install uwsgi 
@@ -156,16 +158,7 @@ RUN apk update \
     && apk add uwsgi \
     && ln -sf /dev/stdout /var/log/uwsgi.log
 
-# Copy files into the image
-COPY nginx.conf /etc/nginx/nginx.conf
 COPY uwsgi.ini /etc/uwsgi.ini
-COPY app /app
-WORKDIR /app
-
-# Build the site
-RUN cd /app \
-    && bundle install \
-    && bundle exec jekyll build
 
 RUN uwsgi --daemonize /var/log/uwsgi.log --ini /etc/uwsgi.ini
 

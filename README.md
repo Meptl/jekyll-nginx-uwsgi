@@ -1,7 +1,5 @@
 # jekyll-nginx-uwsgi
-Docker image combining jekyll, nginx, and uwsgi. Builds the jekyll site located at app. Hosts it through nginx.
-
-An example setup hosting the default jekyll page is included.
+Docker image combining jekyll, nginx, and uwsgi.
 
 # Building & Running
 Add your jekyll site to the app directory.
