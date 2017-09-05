@@ -160,9 +160,8 @@ RUN apk update \
 
 COPY uwsgi.ini /etc/uwsgi.ini
 
-RUN uwsgi --daemonize /var/log/uwsgi.log --ini /etc/uwsgi.ini
 
 STOPSIGNAL SIGTERM
 
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD uwsgi --daemonize /var/log/uwsgi.log --ini /etc/uwsgi.ini & nginx -g "daemon off;"
